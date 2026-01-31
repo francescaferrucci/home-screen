@@ -70,7 +70,17 @@
             font-weight: bold;
             font-size: 18px;
         }
+        /* Add these styles right after .user-badge */
+        .user-section {
+            display: flex;
+            align-items: center;
+        }
         
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
         /* Search Bar */
         .search-container {
             margin-bottom: 30px;
@@ -260,18 +270,22 @@
     <div class="container">
         <!-- Header with Welcome Message -->
         <div class="header">
-            <div class="brand">
-                <div class="logo">Hannahware</div>
-            </div>
-            <div class="user-info">
-                <div class="welcome-message">Welcome, <strong>Francesca Ferrucci</strong> at HE1</div>
-                <div class="user-badge">FF</div>
-            </div>
+    <div class="brand">
+        <div class="logo">Hannahware</div>
+    </div>
+    
+    <!-- Wrap both user info and button in .user-section -->
+    <div class="user-section">
+        <div class="user-info">
+            <div class="welcome-message">Welcome, <strong>Francesca Ferrucci</strong> at HE1</div>
+            <div class="user-badge">FF</div>
         </div>
         
-              <button class="dvm-calendar-btn" id="dvmCalendarBtn">
-    <i class="fas fa-calendar-alt"></i> DVM Calendar
-</button>
+        <!-- DVM Calendar Button -->
+        <button class="dvm-calendar-btn" id="dvmCalendarBtn">
+            <i class="fas fa-calendar-alt"></i> DVM Calendar
+        </button>
+    </div>
         <!-- Search Bar -->
         <div class="search-container">
             <div class="search-bar">
