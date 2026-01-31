@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hannahware Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e5eb;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-right: 15px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .welcome-message {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-right: 15px;
+        }
+        
+        .user-badge {
+            background-color: #51b5e0;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 30px;
+        }
+        
+        .search-bar {
+            display: flex;
+            max-width: 600px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .search-bar input {
+            flex-grow: 1;
+            padding: 15px 25px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background-color: #51b5e0;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar button:hover {
+            background-color: #3a9bc5;
+        }
+        
+        /* Dashboard Grid */
+        .dashboard-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+        }
+        
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .card-items {
+            list-style-type: none;
+            flex-grow: 1;
+        }
+        
+        .card-items li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-items li:last-child {
+            border-bottom: none;
+        }
+        
+        .card-items li i {
+            margin-right: 10px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        /* Color Classes for Cards */
+        .card-checkin { border-top: 5px solid #51b5e0; }
+        .card-checkin .card-icon { background-color: #51b5e0; }
+        
+        .card-appointment { border-top: 5px solid #fdd757; }
+        .card-appointment .card-icon { background-color: #fdd757; }
+        
+        .card-member { border-top: 5px solid #ff6308; }
+        .card-member .card-icon { background-color: #ff6308; }
+        
+        .card-pet { border-top: 5px solid midnightblue; }
+        .card-pet .card-icon { background-color: midnightblue; }
+        
+        .card-reports { border-top: 5px solid #8c2633; }
+        .card-reports .card-icon { background-color: #8c2633; }
+        
+        .card-admin { border-top: 5px solid #1eb53a; }
+        .card-admin .card-icon { background-color: #1eb53a; }
+        
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e1e5eb;
+            color: #7f8c8d;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .user-info {
+                margin-top: 15px;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Welcome Message -->
+        <div class="header">
+            <div class="brand">
+                <div class="logo">Hannahware</div>
+            </div>
+            <div class="user-info">
+                <div class="welcome-message">Welcome, <strong>Francesca Ferrucci</strong> at HE1</div>
+                <div class="user-badge">FF</div>
+            </div>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for pets, members, RX entries, or appointments...">
+                <button>
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+        
+        <!-- Dashboard Title -->
+        <h2 class="dashboard-title">Dashboard</h2>
+        
+        <!-- Card Grid -->
+        <div class="dashboard-grid">
+            <!-- Check In Card -->
+            <div class="card card-checkin">
+                <div class="card-icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+                <h3 class="card-title">Check In</h3>
+                <ul class="card-items">
+                    <li><i class="fas fa-paw"></i> Pet Check In</li>
+                    <li><i class="fas fa-search"></i> Pet Assignment Search</li>
+                    <li><i class="fas fa-clipboard-check"></i> Quick Status Update</li>
+                </ul>
+            </div>
+            
+            <!-- Appointment Scheduling Card -->
+            <div class="card card-appointment">
+                <div class="card-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3 class="card-title">Appointment Scheduling</h3>
+                <ul class="card-items">
+                    <li><i class="fas fa-calendar-day"></i> DVM Calendar</li>
+                    <li><i class="fas fa-stethoscope"></i> Medical Appointments</li>
+                    <li><i class="fas fa-graduation-cap"></i> Behavior & Training</li>
+                </ul>
+            </div>
+            
+            <!-- Member Tools Card -->
+            <div class="card card-member">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="card-title">Member Tools</h3>
+                <ul class="card-items">
+                    <li><i class="fas fa-user-plus"></i> New Member Sign Up</li>
+                    <li><i class="fas fa-search"></i> Member Search</li>
+                    <li><i class="fas fa-key"></i> Reset Password</li>
+                    <li><i class="fas fa-unlock-alt"></i> Retrieve Pin Number</li>
+                </ul>
+            </div>
+            
+            <!-- Pet Management Card -->
+            <div class="card card-pet">
+                <div class="card-icon">
+                    <i class="fas fa-paw"></i>
+                </div>
+                <h3 class="card-title">Pet Management</h3>
+                <ul class="card-items">
+                    <li><i class="fas fa-plus-circle"></i> Pet Entry</li>
+                    <li><i class="fas fa-search"></i> Pet Assignment Search</li>
+                    <li><i class="fas fa-prescription-bottle-alt"></i> RX Search</li>
+                    <li><i class="fas fa-comment-medical"></i> Manage RX and DX</li>
+                </ul>
+            </div>
+            
+            <!-- Reports Card -->
+            <div class="card card-reports">
+                <div class="card-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3 class="card-title">Reports</h3>
+                <ul class="card-items">
+                    <li><i class="fas fa-file-export"></i> Exports</li>
+                    <li><i class="fas fa-chart-line"></i> Analytics Reports</li>
+                    <li><i class="fas fa-clipboard-list"></i> Activity Reports</li>
+                    <li><i class="fas fa-download"></i> Quick Export</li>
+                </ul>
+            </div>
+            
+            <!-- Admin Card -->
+            <div class="card card-admin">
+                <div class="card-icon">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <h3 class="card-title">Admin</h3>
+                <ul class="card-items">
+                    <li><i class="fas fa-user-shield"></i> User Permissions</li>
+                    <li><i class="fas fa-envelope"></i> Read Messages</li>
+                    <li><i class="fas fa-tools"></i> System Settings</li>
+                    <li><i class="fas fa-database"></i> Data Management</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Hannahware Veterinary Management System | © 2026 All rights reserved</p>
+        </div>
+    </div>
+
+    <script>
+        // Add click functionality to cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                const cardTitle = this.querySelector('.card-title').textContent;
+                alert(`Navigating to: ${cardTitle}`);
+            });
+        });
+        
+        // Search functionality
+        document.querySelector('.search-bar button').addEventListener('click', function() {
+            const searchQuery = document.querySelector('.search-bar input').value;
+            if (searchQuery.trim()) {
+                alert(`Searching for: "${searchQuery}"`);
+            }
+        });
+        
+        // Allow Enter key to trigger search
+        document.querySelector('.search-bar input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const searchQuery = this.value;
+                if (searchQuery.trim()) {
+                    alert(`Searching for: "${searchQuery}"`);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
