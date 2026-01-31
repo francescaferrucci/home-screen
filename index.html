@@ -51,7 +51,7 @@
             display: flex;
             align-items: center;
         }
-        
+  
         .welcome-message {
             font-size: 18px;
             color: #2c3e50;
@@ -225,6 +225,34 @@
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
+            
+         /* DVM Calendar Button */
+            .dvm-calendar-btn {
+                background-color: #51b5e0;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(81, 181, 224, 0.3);
+                transition: all 0.3s ease;
+}
+
+            .dvm-calendar-btn:hover {
+                background-color: #3a9bc5;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(81, 181, 224, 0.4);
+            }
+            
+            .dvm-calendar-btn i {
+                margin-right: 8px;
+                font-size: 18px;
+            }
+            }
         }
     </style>
 </head>
@@ -241,6 +269,9 @@
             </div>
         </div>
         
+              <button class="dvm-calendar-btn" id="dvmCalendarBtn">
+    <i class="fas fa-calendar-alt"></i> DVM Calendar
+</button>
         <!-- Search Bar -->
         <div class="search-container">
             <div class="search-bar">
@@ -358,6 +389,12 @@
             }
         });
         
+        // DVM Calendar Button functionality
+        document.getElementById('dvmCalendarBtn').addEventListener('click', function() {
+            alert('Opening DVM Calendar...');
+            // In a real application, this would navigate to the DVM Calendar page
+            // window.location.href = '/dvm-calendar';
+        });
         // Allow Enter key to trigger search
         document.querySelector('.search-bar input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
